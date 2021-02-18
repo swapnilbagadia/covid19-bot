@@ -5,7 +5,7 @@ app:
   job:
     covid-real-time-data:
       enabled: true
-      cron-expression: "0 0/1 * * * *"
+      cron-expression: "0 0/10 * * * *"
       config:
         url: "https://api.covid19api.com/summary"
   twilio:
