@@ -9,5 +9,5 @@ app:
       config:
         url: "https://api.covid19api.com/summary"
   twilio:
-    sid: "AC0421602fe0ff88e056cc5ccfaefdb9af"
-    auth-token: "f283fba8ee4ca5a29eab29295bb50e3e"
+    sid: ${twilio.sid}
+    auth-token: ${twilio.auth.token}
