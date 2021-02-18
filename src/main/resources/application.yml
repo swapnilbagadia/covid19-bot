@@ -1,0 +1,13 @@
+server:
+  servlet.context-path: /covidbot/api
+  port: 8080
+app:
+  job:
+    covid-real-time-data:
+      enabled: true
+      cron-expression: "0 0/1 * * * *"
+      config:
+        url: "https://api.covid19api.com/summary"
+  twilio:
+    sid: "AC0421602fe0ff88e056cc5ccfaefdb9af"
+    auth-token: "f283fba8ee4ca5a29eab29295bb50e3e"
