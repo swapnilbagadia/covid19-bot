@@ -4,6 +4,7 @@ import com.demo.covidbot.apimodels.covid19api.Country;
 import com.demo.covidbot.apimodels.covid19api.CovidDataMain;
 import com.demo.covidbot.constants.Covid19ApiConstants;
 import io.lettuce.core.api.async.RedisAsyncCommands;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,7 @@ import java.util.Objects;
  * @author Swapnil Bagadia
  */
 
+@Slf4j
 @Component
 public class CovidDataPullService {
 
@@ -56,13 +58,12 @@ public class CovidDataPullService {
             ResponseEntity<CovidDataMain> responseEntity = restTemplate.getForEntity(url, CovidDataMain.class);
             populateDataStore(Objects.requireNonNull(responseEntity.getBody()));
         } catch (HttpClientErrorException e) {
-            System.out.println("HttpClientErrorException");
+            log.error("HttpClientErrorException",e);
         } catch (HttpServerErrorException e) {
-            System.out.println("HttpServerErrorException");
+            log.error("HttpServerErrorException",e);
         } catch (RestClientException e) {
-            System.out.println("RestClientException");
+            log.error("RestClientException",e);
         }
-
     }
 
     private void populateDataStore(CovidDataMain covidDataMain) {

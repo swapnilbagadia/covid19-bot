@@ -28,6 +28,7 @@ public class CommandRouter {
     }
 
     public String executeCommand(String command) {
+        command = command.toUpperCase();
         String[] cmd = command.split(" ");
         if (cmd.length != 2) {
             throw new RuntimeException("Invalid Command ->" + command);
