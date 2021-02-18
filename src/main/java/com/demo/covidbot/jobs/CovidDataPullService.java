@@ -66,7 +66,8 @@ public class CovidDataPullService {
     }
 
     private void populateDataStore(CovidDataMain covidDataMain) {
-        redisAsyncCommands.set(Covid19ApiConstants.TOTAL_ACTIVE_CASES_KEY, SerializationUtils.serialize(covidDataMain.getGlobal().getTotalConfirmed()));
+        Long activeCases = covidDataMain.getGlobal().getTotalConfirmed() - covidDataMain.getGlobal().getTotalRecovered();
+        redisAsyncCommands.set(Covid19ApiConstants.TOTAL_ACTIVE_CASES_KEY, SerializationUtils.serialize(activeCases));
         redisAsyncCommands.set(Covid19ApiConstants.TOTAL_DEATHS_KEY, SerializationUtils.serialize(covidDataMain.getGlobal().getTotalDeaths()));
         for (Country country : covidDataMain.getCountries()) {
             redisAsyncCommands.set(country.getCountryCode(), SerializationUtils.serialize(country));
